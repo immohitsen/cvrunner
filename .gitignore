@@ -1,0 +1,65 @@
+###############################
+# Frontend (Node.js & Next.js)
+###############################
+frontend/node_modules/
+frontend/.npm/
+frontend/.next/
+frontend/out/
+frontend/build/
+frontend/venv/
+frontend/.venv/
+frontend/env/
+frontend/.env
+frontend/.env.local
+frontend/.env*.local
+
+###############################
+# Backend (Python)
+###############################
+backend/__pycache__/
+backend/**/*.py[cod]
+backend/**/*$py.class
+backend/**/*.so
+backend/.Python
+backend/build/
+backend/develop-eggs/
+backend/dist/
+backend/downloads/
+backend/eggs/
+backend/.eggs/
+backend/lib/
+backend/lib64/
+backend/parts/
+backend/sdist/
+backend/var/
+backend/*.egg-info/
+backend/.installed.cfg
+backend/*.egg
+backend/venv/
+backend/.venv/
+backend/env/
+backend/.env
+backend/.env.local
+backend/.env*.local
+
+###############################
+# Root level env files
+###############################
+.env
+.env.local
+.env*.local
+
+###############################
+# IDE/editor files
+###############################
+.idea/
+.vscode/
+*.swp
+*.swo
+*.sublime-workspace
+
+###############################
+# OS files
+###############################
+.DS_Store
+Thumbs.db
