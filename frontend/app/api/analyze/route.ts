@@ -33,45 +33,67 @@ export async function POST(req: NextRequest) {
       });
     }
 
-    const prompt = `You are an expert ATS (Applicant Tracking System) and Technical Recruiter.
-        Analyze the following Resume against the provided Job Description (JD) or Job Role.
-        Note: If the user provided a job role (e.g., "Frontend Developer", "Data Scientist") instead of a full job description, evaluate the resume against the standard industry skills and expectations for that job role.
+    const prompt = `You are a strict, highly critical ATS (Applicant Tracking System) scanner and professional resume auditor. 
+      Analyze the following Resume against the target Job Description (JD) or Job Role.
 
-        Tasks:
-        1. Calculate a realistic "resume_score" from 0 to 100 representing how well the Resume matches the JD/Job Role. Consider semantic fit, skill overlap, and context (e.g. knowing 'React' implies knowing 'JavaScript').
-        2. Grade the resume on 4 specific metrics out of 100:
-          - "impact": Did they quantify achievements (e.g. used numbers/percentages)?
-          - "brevity": Are the bullet points concise and easy to read?
-          - "style": Did they use strong action verbs?
-          - "skills": How perfectly do their skills match the JD/Job Role?
-        3. Extract a list of technical and professional skills found in the Resume.
-        4. Extract a list of technical and professional skills found in the JD/Job Role. If only a job role was specified, list the typical skills required for that role.
-        5. Identify the skills from the JD/Job Role that are MISSING from the Resume (or standard expected skills for that role that the resume is missing).
-        6. Provide exactly 3 short, actionable bullet points advising how the candidate can improve their resume based on the missing skills and the target role/description.
+      Scoring Rules & Rubric (Be Rigorous - Do NOT inflate scores):
+      - Resumes should rarely get >75 unless they are exceptionally tailored, highly quantified, and contain all core keywords.
+      - Maximum Score 60: If the resume contains zero quantified metrics (no numbers, percentages, dollar amounts, or timelines).
+      - Maximum Score 65: If the resume is missing core technical keywords/skills specified in the JD or expected for the Job Role.
+      - Rubric:
+        * 0 - 45: Poor alignment, major missing skill gaps, lack of metrics, poor action verbs.
+        * 45 - 65: Average alignment, has basic skills but lacks core stack requirements or fails to show impact.
+        * 65 - 80: Good alignment, possesses most key skills, but lacks optimization.
+        * 80 - 100: Exceptional alignment, perfectly tailored, quantified achievements on almost every line.
 
-        Rules:
-        - Normalize all skills to lowercase (e.g. 'react.js').
-        - Return ONLY a valid JSON object.
-        - The JSON must match this structure exactly:
-        {
-            "resume_score": int,
-            "metrics": {
-                "impact": int,
-                "brevity": int,
-                "style": int,
-                "skills": int
-            },
-            "resume_skills": ["str"],
-            "jd_skills": ["str"],
-            "missing_skills": ["str"],
-            "suggestions": ["str"]
-        }
+      Tasks:
+      1. Calculate a realistic "resume_score" (0-100) using the rubric above.
+      2. Grade the resume on 4 metrics out of 100:
+        - "impact": Action verbs & quantified achievements.
+        - "brevity": Conciseness and readability.
+        - "style": Formatting, structure, and readability.
+        - "skills": Keyword matching and semantic alignment.
+      3. Extract a list of technical/professional skills found in the Resume.
+      4. Extract a list of technical/professional skills required in the JD/Job Role.
+      5. Identify the skills from the JD/Job Role that are MISSING from the Resume.
+      6. Provide exactly 3 highly specific, structural suggestions. For each suggestion, output:
+        - "section": The section/job experience where the change should be made.
+        - "issue": What is wrong (e.g. weak verbs, lack of numbers).
+        - "fix": What the candidate needs to do.
+        - "before": A direct quote or realistic representation of the weak line from the resume.
+        - "after": A rewritten, high-impact version with strong action verbs and simulated metrics.
 
-        Resume:
-        ${resumeText.slice(0, 4000)}
+      Rules:
+      - Normalize all skills to lowercase (e.g. 'react.js').
+      - Return ONLY a valid JSON object.
+      - The JSON must match this structure exactly:
+      {
+          "resume_score": int,
+          "metrics": {
+              "impact": int,
+              "brevity": int,
+              "style": int,
+              "skills": int
+          },
+          "resume_skills": ["str"],
+          "jd_skills": ["str"],
+          "missing_skills": ["str"],
+          "suggestions": [
+              {
+                  "section": "str",
+                  "issue": "str",
+                  "fix": "str",
+                  "before": "str",
+                  "after": "str"
+              }
+          ]
+      }
 
-        Job Description / Job Role:
-        ${jdText.slice(0, 4000)}`;
+      Resume:
+      ${resumeText.slice(0, 4000)}
+
+      Job Description / Job Role:
+      ${jdText.slice(0, 4000)}`;
 
     const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
       method: "POST",

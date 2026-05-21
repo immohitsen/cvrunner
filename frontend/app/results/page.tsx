@@ -231,15 +231,54 @@ export default function Results() {
                 <h2 className="text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
                   <ListChecks size={24} className="text-blue-600" /> Recommended Actions
                 </h2>
-                <div className="space-y-4">
-                  {data.ai_suggestions.map((sug: string, idx: number) => (
-                    <div key={idx} className="flex gap-4 p-5 bg-blue-50/30 rounded-xl border border-blue-100/50 items-start">
-                      <div className="mt-0.5 w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center shrink-0">
-                        <span className="text-[11px] font-bold text-blue-700">{idx + 1}</span>
+                <div className="space-y-6">
+                  {data.ai_suggestions.map((sug: any, idx: number) => {
+                    const isObject = typeof sug === 'object' && sug !== null;
+                    const section = isObject ? sug.section : "General";
+                    const issue = isObject ? sug.issue : sug;
+                    const fix = isObject ? sug.fix : null;
+                    const before = isObject ? sug.before : null;
+                    const after = isObject ? sug.after : null;
+
+                    return (
+                      <div key={idx} className="border border-gray-200/80 rounded-xl p-6 bg-[#FCFDFE] flex flex-col gap-4 shadow-sm hover:shadow-md/50 transition-all duration-200">
+                        <div className="flex items-center justify-between gap-4">
+                          <div className="flex items-center gap-3">
+                            <div className="w-6 h-6 rounded-full bg-black flex items-center justify-center text-white text-[11px] font-bold shrink-0">
+                              {idx + 1}
+                            </div>
+                            <span className="text-[11px] font-bold uppercase tracking-wider text-gray-500 bg-gray-100/80 px-2.5 py-1 rounded-md border border-gray-200/40">
+                              {section || "General"}
+                            </span>
+                          </div>
+                        </div>
+
+                        <div className="space-y-2">
+                          <h4 className="text-[14px] font-bold text-gray-900 leading-snug">
+                            {issue}
+                          </h4>
+                          {fix && (
+                            <p className="text-[13px] text-gray-600 font-medium">
+                              <strong className="text-gray-900">Fix: </strong>{fix}
+                            </p>
+                          )}
+                        </div>
+
+                        {before && after && (
+                          <div className="grid md:grid-cols-2 gap-3 mt-1 text-[12px] font-medium leading-relaxed">
+                            <div className="bg-red-50/40 border border-red-100/80 rounded-lg p-3.5 text-red-800">
+                              <span className="block text-[9px] font-bold text-red-500 uppercase tracking-wider mb-1.5">Original Draft</span>
+                              <span className="italic">"{before}"</span>
+                            </div>
+                            <div className="bg-green-50/40 border border-green-100/80 rounded-lg p-3.5 text-green-800">
+                              <span className="block text-[9px] font-bold text-green-600 uppercase tracking-wider mb-1.5">ATS-Optimized Version</span>
+                              <span>"{after}"</span>
+                            </div>
+                          </div>
+                        )}
                       </div>
-                      <p className="text-[14px] text-gray-800 leading-relaxed font-medium">{sug}</p>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
               </div>
 
