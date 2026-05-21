@@ -26,22 +26,22 @@ export function Footer() {
         </div>
 
         {/* Column 3: Developer & Github */}
-        <div className="flex flex-col gap-3 md:items-end">
+        <div className="flex flex-col gap-3 md:items-end ">
           <span className="text-[11px] font-bold uppercase tracking-wider text-gray-400">Developer</span>
-          <p className="text-sm text-gray-500 leading-relaxed mb-1 font-medium md:text-right max-w-sm">
-            Created by a passionate developer focused on building impactful and modern web applications.
+          <p className="text-sm text-gray-500 leading-relaxed font-medium md:text-left max-w-sm">
+            Created with ❤️ by <a href="https://github.com/immohitsen" target="_blank" rel="noopener noreferrer" className="text-sm font-bold text-gray-900 hover:text-gray-600 transition-colors">Mohit Sen</a>.
           </p>
           <a
-            href="https://github.com"
+            href="https://github.com/immohitsen/cvrunner"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sm font-bold text-gray-900 hover:text-gray-600 transition-colors w-fit flex items-center gap-1.5"
+            className="underline text-sm font-bold text-gray-900 hover:text-gray-600 transition-colors w-fit"
           >
-            GitHub Profile →
+            GitHub Repository
           </a>
         </div>
       </div>
-      
+
       {/* Bottom copyright bar */}
       <div className="max-w-7xl mx-auto border-t border-gray-100 mt-10 pt-6 flex flex-col sm:flex-row justify-between items-center gap-4">
         <p className="text-xs text-gray-400 font-medium">

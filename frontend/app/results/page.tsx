@@ -103,7 +103,7 @@ export default function Results() {
               <h3 className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Input Context</h3>
 
               {/* Uploaded File Item */}
-              <div className="bg-white border border-gray-200 shadow-sm rounded-lg p-4 flex items-start gap-4 mb-4">
+              <div className="bg-white border-2 border-gray-200 rounded-lg p-4 flex items-start gap-4 mb-4">
                 <div className="w-10 h-10 rounded bg-red-50 flex items-center justify-center shrink-0 border border-red-100">
                   <FilePdf size={24} weight="fill" className="text-red-500" />
                 </div>
