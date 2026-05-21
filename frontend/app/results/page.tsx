@@ -215,7 +215,7 @@ export default function Results() {
 
                 <div className="grid md:grid-cols-2 gap-4 md:gap-6">
                   {/* Missing */}
-                  <div className="bg-white border border-gray-200 rounded-xl p-4 md:p-6">
+                  <div className="bg-white border border-gray-200 rounded-md p-4 md:p-6">
                     <h3 className="text-[12px] md:text-[13px] font-bold text-gray-900 uppercase tracking-widest mb-3 md:mb-4 flex items-center gap-2">
                       <WarningCircle size={16} className="text-red-500" weight="fill" /> Critical Missing
                     </h3>
@@ -231,7 +231,7 @@ export default function Results() {
                   </div>
 
                   {/* Matched */}
-                  <div className="bg-white border border-gray-200 rounded-xl p-4 md:p-6">
+                  <div className="bg-white border border-gray-200 rounded-md p-4 md:p-6">
                     <h3 className="text-[12px] md:text-[13px] font-bold text-gray-900 uppercase tracking-widest mb-3 md:mb-4 flex items-center gap-2">
                       <CheckCircle size={16} className="text-green-500" weight="fill" /> Extracted
                     </h3>
@@ -263,7 +263,7 @@ export default function Results() {
                     const after = isObject ? sug.after : null;
 
                     return (
-                      <div key={idx} className="border border-gray-200/80 rounded-xl p-4 md:p-6 bg-[#FCFDFE] flex flex-col gap-3 md:gap-4 shadow-sm hover:shadow-md/50 transition-all duration-200">
+                      <div key={idx} className="border border-gray-200/80 rounded-md p-4 md:p-6 bg-[#FCFDFE] flex flex-col gap-3 md:gap-4 ">
                         <div className="flex items-center justify-between gap-4">
                           <div className="flex items-center gap-2 md:gap-3">
                             <div className="w-5 h-5 md:w-6 md:h-6 rounded-full bg-black flex items-center justify-center text-white text-[10px] md:text-[11px] font-bold shrink-0">

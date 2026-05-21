@@ -158,6 +158,14 @@ export default function Home() {
               className="w-full mt-3 p-4 border border-gray-200 rounded-lg focus:ring-1 focus:ring-black focus:border-black focus:outline-none resize-none h-28 bg-gray-50 text-[13px] transition-all"
               value={jd}
               onChange={(e) => setJd(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" && (e.ctrlKey || e.metaKey)) {
+                  e.preventDefault();
+                  if (file && jd && !loading) {
+                    handleAnalyze();
+                  }
+                }
+              }}
             />
 
             <button
