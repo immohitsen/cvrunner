@@ -31,7 +31,7 @@ export default function Home() {
       formData.append("resume", file);
       formData.append("job_description", jd);
 
-      const res = await fetch("http://127.0.0.1:8000/api/v1/analyze", {
+      const res = await fetch("/api/analyze", {
         method: "POST",
         body: formData,
       });
@@ -45,7 +45,7 @@ export default function Home() {
       router.push("/results");
     } catch (error) {
       console.error(error);
-      alert("Failed to analyze resume. Make sure your Python backend is running!");
+      alert("Failed to analyze resume. Please try again later.");
       setLoading(false);
     }
   };
@@ -119,7 +119,7 @@ export default function Home() {
             </div>
 
             <textarea
-              placeholder="Paste the target Job Description here (Required)"
+              placeholder="Paste the target Job Description or Job Role here (e.g. Frontend Developer) (Required)"
               className="w-full mt-3 p-4 border border-gray-200 rounded-lg focus:ring-1 focus:ring-black focus:border-black focus:outline-none resize-none h-28 bg-gray-50 text-[13px] transition-all"
               value={jd}
               onChange={(e) => setJd(e.target.value)}

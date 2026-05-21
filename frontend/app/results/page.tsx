@@ -92,7 +92,7 @@ export default function Results() {
             <div className="bg-[#F8F9FA] border border-gray-200 rounded-lg p-4 flex flex-col h-[280px]">
                <div className="flex items-center gap-2 mb-3 text-gray-700">
                  <Article size={18} weight="fill" />
-                 <span className="text-[13px] font-bold">Target Job Description</span>
+                 <span className="text-[13px] font-bold">Target JD / Job Role</span>
                </div>
                <div className="flex-1 overflow-y-auto pr-2 custom-scrollbar">
                  <p className="text-[12px] text-gray-600 leading-relaxed whitespace-pre-wrap font-medium">
