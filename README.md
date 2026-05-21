@@ -1,6 +1,6 @@
-# CVRunner - Frontend
+# CVRunner
 
-This is the Next.js frontend application for CVRunner, an AI-powered resume analyzer.
+CVRunner is an AI-powered resume analyzer designed to help candidates optimize their resumes for Applicant Tracking Systems (ATS) and human recruiters. It performs semantic analysis to match your experience directly against a target job description.
 
 ## Key Features
 
@@ -21,21 +21,26 @@ This is the Next.js frontend application for CVRunner, an AI-powered resume anal
 
 ### Prerequisites
 
-Ensure you have Node.js installed.
+You will need Node.js installed and a Groq API key.
 
 ### Setup & Installation
 
-1. Install dependencies:
+1. Navigate to the frontend directory:
+   ```bash
+   cd frontend
+   ```
+
+2. Install dependencies:
    ```bash
    npm install
    ```
 
-2. Create a `.env` file in this directory:
+3. Create a `.env` file in the `frontend` directory:
    ```env
    GROQ_API_KEY=your_groq_api_key_here
    ```
 
-3. Run the development server:
+4. Run the development server:
    ```bash
    npm run dev
    ```
