@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { UploadSimple, FilePdf, CheckCircle, WarningCircle, UserCircle, Star, ArrowRight, List, X } from "@phosphor-icons/react";
 import { PointerHighlight } from "@/components/ui/pointer-highlight";
 import { EncryptedText } from "@/components/ui/encrypted-text";
+import { Footer } from "@/components/Footer";
 
 
 export default function Home() {
@@ -230,6 +231,8 @@ export default function Home() {
           </div>
         </div>
       </main>
+
+      <Footer />
 
       {/* Fullscreen Loading Overlay */}
       {loading && (

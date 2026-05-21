@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { ArrowRight, Info, Code, ShieldCheck, List, X } from "@phosphor-icons/react";
+import { Footer } from "@/components/Footer";
 
 export default function About() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -108,6 +109,7 @@ export default function About() {
 
             <div className="h-24"></div> {/* Bottom spacer */}
           </div>
+          <Footer />
         </main>
       </div>
 

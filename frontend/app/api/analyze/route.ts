@@ -37,14 +37,14 @@ export async function POST(req: NextRequest) {
       Analyze the following Resume against the target Job Description (JD) or Job Role.
 
       Scoring Rules & Rubric (Be Rigorous - Do NOT inflate scores):
-      - Resumes should rarely get >75 unless they are exceptionally tailored, highly quantified, and contain all core keywords.
+      - Resumes should rarely get > 85 unless they are exceptionally tailored, highly quantified, and contain all core keywords.
       - Maximum Score 60: If the resume contains zero quantified metrics (no numbers, percentages, dollar amounts, or timelines).
       - Maximum Score 65: If the resume is missing core technical keywords/skills specified in the JD or expected for the Job Role.
       - Rubric:
         * 0 - 45: Poor alignment, major missing skill gaps, lack of metrics, poor action verbs.
         * 45 - 65: Average alignment, has basic skills but lacks core stack requirements or fails to show impact.
-        * 65 - 80: Good alignment, possesses most key skills, but lacks optimization.
-        * 80 - 100: Exceptional alignment, perfectly tailored, quantified achievements on almost every line.
+        * 65 - 85: Good alignment, possesses most key skills, but lacks optimization.
+        * 85 - 100: Exceptional alignment, perfectly tailored, quantified achievements on almost every line.
 
       Tasks:
       1. Calculate a realistic "resume_score" (0-100) using the rubric above.
@@ -56,7 +56,7 @@ export async function POST(req: NextRequest) {
       3. Extract a list of technical/professional skills found in the Resume.
       4. Extract a list of technical/professional skills required in the JD/Job Role.
       5. Identify the skills from the JD/Job Role that are MISSING from the Resume.
-      6. Provide exactly 3 highly specific, structural suggestions. For each suggestion, output:
+      6. Provide 3-5 highly specific, structural suggestions. For each suggestion, output:
         - "section": The section/job experience where the change should be made.
         - "issue": What is wrong (e.g. weak verbs, lack of numbers).
         - "fix": What the candidate needs to do.
@@ -121,6 +121,8 @@ export async function POST(req: NextRequest) {
     const responseData = await response.json();
     const cleanContent = responseData.choices[0].message.content.trim();
     const data = JSON.parse(cleanContent);
+    // console.log(data)
+
 
     // Format output matching original Python API response
     return NextResponse.json({
