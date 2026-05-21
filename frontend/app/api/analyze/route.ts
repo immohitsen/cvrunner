@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 // @ts-ignore
-import { PDFParse } from "pdf-parse";
+import { getDocumentProxy, extractText } from "unpdf";
 
 export async function POST(req: NextRequest) {
   try {
@@ -18,9 +18,8 @@ export async function POST(req: NextRequest) {
     // 1. Read and parse PDF
     const fileBytes = await resumeFile.arrayBuffer();
     const uint8Array = new Uint8Array(fileBytes);
-    const parser = new PDFParse(uint8Array);
-    const pdfData = await parser.getText();
-    const resumeText = pdfData.text || "";
+    const pdf = await getDocumentProxy(uint8Array);
+    const { text: resumeText } = await extractText(pdf, { mergePages: true });
 
     // 2. Use AI to extract skills, score, and suggestions
     const apiKey = process.env.GROQ_API_KEY;

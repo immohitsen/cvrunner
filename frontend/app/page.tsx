@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { UploadSimple, FilePdf, CheckCircle, WarningCircle, UserCircle, Star, ArrowRight, List, X } from "@phosphor-icons/react";
 import { PointerHighlight } from "@/components/ui/pointer-highlight";
@@ -13,6 +13,40 @@ export default function Home() {
   const [jd, setJd] = useState("");
   const [loading, setLoading] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const [loadingStep, setLoadingStep] = useState(0);
+
+  const loadingMessages = [
+    "Reading PDF file structure...",
+    "Extracting layout and resume text...",
+    "Comparing skills against target role...",
+    "Evaluating resume style and formatting...",
+    "Generating final optimization report..."
+  ];
+
+  useEffect(() => {
+    let interval: any;
+    if (loading) {
+      setProgress(0);
+      setLoadingStep(0);
+      interval = setInterval(() => {
+        setProgress((prev) => {
+          if (prev >= 98) {
+            clearInterval(interval);
+            return 98;
+          }
+          const next = prev + Math.floor(Math.random() * 8) + 3;
+          if (next < 20) setLoadingStep(0);
+          else if (next < 45) setLoadingStep(1);
+          else if (next < 70) setLoadingStep(2);
+          else if (next < 90) setLoadingStep(3);
+          else setLoadingStep(4);
+          return Math.min(next, 98);
+        });
+      }, 200);
+    }
+    return () => clearInterval(interval);
+  }, [loading]);
 
   const handleDragOver = (e: any) => e.preventDefault();
   const handleDrop = (e: any) => {
@@ -54,15 +88,15 @@ export default function Home() {
     <div className="min-h-screen bg-[#fafafa] text-gray-900 font-sans">
       <nav className="relative flex items-center justify-between px-8 py-5 max-w-7xl mx-auto border-b border-gray-200/50 z-30 bg-[#fafafa]">
         <div className="text-xl font-heading font-bold text-gray-900 tracking-tighter">CVRunner</div>
-        
+
         {/* Desktop Nav */}
         <div className="absolute left-1/2 transform -translate-x-1/2 hidden md:flex gap-8 text-[13px] font-medium text-gray-500">
           <a href="/" className="text-gray-900 transition-colors">Home</a>
           <a href="/about" className="hover:text-gray-900 transition-colors">About</a>
         </div>
-        
+
         {/* Mobile Hamburger Button */}
-        <button 
+        <button
           className="md:hidden text-gray-500 hover:text-gray-900 p-1"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         >
@@ -196,6 +230,40 @@ export default function Home() {
           </div>
         </div>
       </main>
+
+      {/* Fullscreen Loading Overlay */}
+      {loading && (
+        <div className="fixed inset-0 bg-[#fafafa]/90 backdrop-blur-md z-50 flex flex-col items-center justify-center p-6">
+          <div className="max-w-md w-full flex flex-col items-center text-center gap-6">
+
+            {/* Spinning Loader Ring with Progress Percentage inside */}
+            <div className="relative w-20 h-20 flex items-center justify-center">
+              <div className="absolute inset-0 rounded-full border-2 border-gray-200"></div>
+              <div
+                className="absolute inset-0 rounded-full border-2 border-black border-t-transparent border-r-transparent animate-spin"
+                style={{ animationDuration: '0.8s' }}
+              ></div>
+              <span className="text-[15px] font-bold text-gray-900">{progress}%</span>
+            </div>
+
+            {/* Text description */}
+            <div className="flex flex-col gap-1.5">
+              <h3 className="text-[15px] font-bold text-gray-900 tracking-tight">Analyzing Document</h3>
+              <p className="text-[12px] text-gray-500 font-medium transition-all duration-300 min-h-[18px]">
+                {loadingMessages[loadingStep]}
+              </p>
+            </div>
+
+            {/* Shimmering Progress Bar */}
+            <div className="w-56 h-1 bg-gray-200 rounded-full overflow-hidden relative shadow-inner">
+              <div
+                className="absolute top-0 bottom-0 left-0 bg-black transition-all duration-300 ease-out"
+                style={{ width: `${progress}%` }}
+              ></div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
