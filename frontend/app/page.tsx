@@ -2,18 +2,17 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { UploadSimple, FilePdf, CheckCircle, WarningCircle, UserCircle, Star, ArrowRight, List, X } from "@phosphor-icons/react";
+import { UploadSimple, FilePdf, CheckCircle, WarningCircle, UserCircle, Star, ArrowRight } from "@phosphor-icons/react";
 import { PointerHighlight } from "@/components/ui/pointer-highlight";
 import { EncryptedText } from "@/components/ui/encrypted-text";
 import { Footer } from "@/components/Footer";
-
+import { Navbar } from "@/components/Navbar";
 
 export default function Home() {
   const router = useRouter();
   const [file, setFile] = useState<File | null>(null);
   const [jd, setJd] = useState("");
   const [loading, setLoading] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [progress, setProgress] = useState(0);
   const [loadingStep, setLoadingStep] = useState(0);
 
@@ -86,32 +85,10 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-[#fafafa] text-gray-900 font-sans">
-      <nav className="relative flex items-center justify-between px-8 py-5 max-w-7xl mx-auto border-b border-gray-200/50 z-30 bg-[#fafafa]">
-        <div className="text-xl font-heading font-bold text-gray-900 tracking-tighter">CVRunner</div>
-
-        {/* Desktop Nav */}
-        <div className="absolute left-1/2 transform -translate-x-1/2 hidden md:flex gap-8 text-[13px] font-medium text-gray-500">
-          <a href="/" className="text-gray-900 transition-colors">Home</a>
-          <a href="/about" className="hover:text-gray-900 transition-colors">About</a>
-        </div>
-
-        {/* Mobile Hamburger Button */}
-        <button
-          className="md:hidden text-gray-500 hover:text-gray-900 p-1"
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-        >
-          {isMobileMenuOpen ? <X size={24} /> : <List size={24} />}
-        </button>
-
-        {/* Mobile Menu Dropdown */}
-        {isMobileMenuOpen && (
-          <div className="absolute top-full left-0 w-full bg-white border-b border-gray-200 shadow-sm flex flex-col p-4 md:hidden gap-4">
-            <a href="/" className="text-[14px] font-medium text-gray-900">Home</a>
-            <a href="/about" className="text-[14px] font-medium text-gray-500">About</a>
-          </div>
-        )}
-      </nav>
+    <div className="min-h-screen bg-[#fafafa] text-gray-900 font-sans flex flex-col justify-between">
+      <div className="w-full">
+        <Navbar />
+      </div>
 
       {/* Hero Section */}
       <main className="max-w-7xl mx-auto px-8 pt-16 pb-24 grid md:grid-cols-2 gap-16 items-center">

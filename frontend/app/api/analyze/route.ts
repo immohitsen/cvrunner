@@ -62,6 +62,7 @@ export async function POST(req: NextRequest) {
         - "fix": What the candidate needs to do.
         - "before": A direct quote or realistic representation of the weak line from the resume.
         - "after": A rewritten, high-impact version with strong action verbs and simulated metrics.
+      7. Extract candidate contact info: Name (full name), Email, Phone, and links (portfolio/LinkedIn/GitHub links found).
 
       Rules:
       - Normalize all skills to lowercase (e.g. 'react.js').
@@ -78,6 +79,12 @@ export async function POST(req: NextRequest) {
           "resume_skills": ["str"],
           "jd_skills": ["str"],
           "missing_skills": ["str"],
+          "candidate_info": {
+              "name": "str",
+              "email": "str",
+              "phone": "str",
+              "links": ["str"]
+          },
           "suggestions": [
               {
                   "section": "str",
@@ -130,7 +137,9 @@ export async function POST(req: NextRequest) {
       metrics: data.metrics || { impact: 0, brevity: 0, style: 0, skills: 0 },
       extracted_skills: (data.resume_skills || []).slice(0, 15),
       missing_skills: (data.missing_skills || []).slice(0, 10),
-      ai_suggestions: data.suggestions || []
+      ai_suggestions: data.suggestions || [],
+      resume_text: resumeText,
+      candidate_info: data.candidate_info || { name: "", email: "", phone: "", links: [] }
     });
 
   } catch (error: any) {

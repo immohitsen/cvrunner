@@ -1,51 +1,13 @@
 "use client";
 
-import { useState } from "react";
-import { ArrowRight, Info, Code, ShieldCheck, List, X } from "@phosphor-icons/react";
+import { ArrowRight, Info, Code, ShieldCheck } from "@phosphor-icons/react";
 import { Footer } from "@/components/Footer";
+import { Navbar } from "@/components/Navbar";
 
 export default function About() {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
   return (
     <div className="h-screen w-full flex flex-col overflow-hidden bg-white text-gray-900 font-sans">
-
-      {/* Navbar (Restored Top Menu) */}
-      <nav className="relative flex items-center justify-between px-8 py-4 border-b border-gray-200 bg-white shrink-0 z-30">
-        <div className="text-xl font-heading font-bold text-gray-900 tracking-tighter">CVRunner</div>
-        
-        {/* Desktop Nav */}
-        <div className="absolute left-1/2 transform -translate-x-1/2 hidden md:flex gap-8 text-[13px] font-medium text-gray-500">
-          <a href="/" className="hover:text-gray-900 transition-colors">Home</a>
-          <a href="/about" className="text-gray-900 transition-colors">About</a>
-        </div>
-        
-        <div className="hidden md:flex">
-          <a href="/" className="text-[13px] font-medium text-gray-500 hover:text-black flex items-center gap-1.5 transition-colors bg-gray-50 px-3 py-1.5 rounded-md border border-gray-200 shadow-sm">
-            Optimize a Resume <ArrowRight size={14} />
-          </a>
-        </div>
-
-        {/* Mobile Hamburger Button */}
-        <button 
-          className="md:hidden text-gray-500 hover:text-gray-900 p-1"
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-        >
-          {isMobileMenuOpen ? <X size={24} /> : <List size={24} />}
-        </button>
-
-        {/* Mobile Menu Dropdown */}
-        {isMobileMenuOpen && (
-          <div className="absolute top-full left-0 w-full bg-white border-b border-gray-200 shadow-sm flex flex-col p-4 md:hidden gap-4">
-            <a href="/" className="text-[14px] font-medium text-gray-500">Home</a>
-            <a href="/about" className="text-[14px] font-medium text-gray-900">About</a>
-            <div className="h-px w-full bg-gray-100 my-2"></div>
-            <a href="/" className="text-[14px] font-medium text-gray-900 flex items-center gap-1.5">
-              Optimize a Resume <ArrowRight size={14} />
-            </a>
-          </div>
-        )}
-      </nav>
+      <Navbar />
 
       {/* Workspace Layout */}
       <div className="flex-1 flex overflow-hidden relative">

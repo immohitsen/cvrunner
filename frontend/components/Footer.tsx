@@ -19,6 +19,9 @@ export function Footer() {
             <a href="/" className="text-sm text-gray-600 hover:text-gray-900 transition-colors w-fit">
               Home
             </a>
+            <a href="/cover-letter" className="text-sm text-gray-600 hover:text-gray-900 transition-colors w-fit">
+              Cover Letter
+            </a>
             <a href="/about" className="text-sm text-gray-600 hover:text-gray-900 transition-colors w-fit">
               About
             </a>
