@@ -289,7 +289,7 @@ export default function Results() {
               </div>
             ) : (
               /* Cover Letter Workspace View */
-              <div className="bg-white rounded-md border border-gray-200/60 p-5 sm:p-8 md:p-12 shadow-sm animate-in fade-in duration-300">
+              <div className="bg-white rounded-md border border-gray-200/60 p-4 sm:p-6 md:p-10 shadow-sm animate-in fade-in duration-300">
                 <div className="flex flex-col gap-1 mb-6 text-center sm:text-left">
                   <h1 className="text-2xl sm:text-3xl font-heading font-black tracking-tight text-gray-900">
                     Draft Tailored Cover Letter

@@ -80,7 +80,13 @@ export default function CoverLetterPage() {
   const handleDrop = (e: any) => {
     e.preventDefault();
     if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-      setFile(e.dataTransfer.files[0]);
+      const droppedFile = e.dataTransfer.files[0];
+      const isPdf = droppedFile.type === "application/pdf" || droppedFile.name.toLowerCase().endsWith(".pdf");
+      if (!isPdf) {
+        alert("Please upload a PDF file only.");
+        return;
+      }
+      setFile(droppedFile);
     }
   };
 
@@ -156,7 +162,7 @@ export default function CoverLetterPage() {
         <Navbar />
       </div>
 
-      <main className="flex-grow max-w-4xl w-full mx-auto px-4 py-12 flex flex-col items-center">
+      <main className="flex-grow max-w-4xl w-full mx-auto px-4 py-6 md:py-12 flex flex-col items-center">
         
         {/* Workspace Mode (Direct Response Displayed) */}
         {hasData ? (
@@ -196,7 +202,7 @@ export default function CoverLetterPage() {
 
             {/* Upload form container */}
             <div
-              className="border border-dashed border-gray-300 rounded-xl p-8 bg-white flex flex-col items-center text-center gap-5 relative group transition-all hover:border-gray-400 shadow-sm hover:shadow-md"
+              className="border border-dashed border-gray-300 rounded-xl p-6 sm:p-8 bg-white flex flex-col items-center text-center gap-5 relative group transition-all hover:border-gray-400 shadow-sm hover:shadow-md"
               onDragOver={handleDragOver}
               onDrop={handleDrop}
             >
@@ -205,7 +211,17 @@ export default function CoverLetterPage() {
                 id="file-upload-cover"
                 className="hidden"
                 accept=".pdf"
-                onChange={(e) => { if (e.target.files && e.target.files[0]) setFile(e.target.files[0]); }}
+                onChange={(e) => {
+                if (e.target.files && e.target.files[0]) {
+                  const selectedFile = e.target.files[0];
+                  const isPdf = selectedFile.type === "application/pdf" || selectedFile.name.toLowerCase().endsWith(".pdf");
+                  if (!isPdf) {
+                    alert("Please upload a PDF file only.");
+                    return;
+                  }
+                  setFile(selectedFile);
+                }
+              }}
               />
 
               <label htmlFor="file-upload-cover" className="w-12 h-12 bg-gray-50 rounded-full flex items-center justify-center shadow-sm border border-gray-100 text-gray-600 mb-1 cursor-pointer hover:scale-105 transition-transform">

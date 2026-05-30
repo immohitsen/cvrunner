@@ -52,7 +52,13 @@ export default function Home() {
   const handleDrop = (e: any) => {
     e.preventDefault();
     if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-      setFile(e.dataTransfer.files[0]);
+      const droppedFile = e.dataTransfer.files[0];
+      const isPdf = droppedFile.type === "application/pdf" || droppedFile.name.toLowerCase().endsWith(".pdf");
+      if (!isPdf) {
+        alert("Please upload a PDF file only.");
+        return;
+      }
+      setFile(droppedFile);
     }
   };
 
@@ -116,7 +122,17 @@ export default function Home() {
               id="file-upload"
               className="hidden"
               accept=".pdf"
-              onChange={(e) => { if (e.target.files && e.target.files[0]) setFile(e.target.files[0]); }}
+              onChange={(e) => {
+                if (e.target.files && e.target.files[0]) {
+                  const selectedFile = e.target.files[0];
+                  const isPdf = selectedFile.type === "application/pdf" || selectedFile.name.toLowerCase().endsWith(".pdf");
+                  if (!isPdf) {
+                    alert("Please upload a PDF file only.");
+                    return;
+                  }
+                  setFile(selectedFile);
+                }
+              }}
             />
 
             <label htmlFor="file-upload" className="w-12 h-12 bg-gray-50 rounded-full flex items-center justify-center shadow-sm border border-gray-100 text-gray-600 mb-1 cursor-pointer hover:scale-105 transition-transform">

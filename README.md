@@ -7,8 +7,12 @@ CVRunner is an AI-powered resume analyzer designed to help candidates optimize t
 - **ATS Compatibility Scoring**: Generates a score based on style, brevity, impact, and skill alignment.
 - **Skill Gap Analysis**: Identifies critical missing keywords/skills and highlights matched qualifications.
 - **Actionable Suggestions**: Provides specific before/after rewrites for impact and clarity.
-- **Responsive Workspace**: Clean dashboard layout with a toggleable tab bar for mobile viewports.
-- **Privacy First**: Resumes are parsed in-memory and immediately discarded after analysis.
+- **Tailored Cover Letter Generator**: Generates customized cover letters using AI, aligned with your resume accomplishments and the target role.
+- **Interactive Cover Letter Workspace**: Directly edit, refine, copy, or download your customized cover letters in standard text format.
+- **Customizable Tone & Length**: Toggle between Professional, Confident, and Creative tones, and set word count constraints dynamically.
+- **Fully Responsive Workspace**: Clean, responsive layout with a toggleable dashboard and custom panels optimized for mobile and desktop viewports.
+- **Robust PDF Validation**: Secure client-side and drag-and-drop validation enforcing PDF-only uploads.
+- **Privacy First**: Resumes are parsed in-memory and discarded after analysis.
 
 ## Tech Stack
 
